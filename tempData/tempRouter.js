@@ -7,9 +7,9 @@ const tempHandler = require('./tempHandler');
 TempRouter.all('/temp', (req, res) => {
 if(req.method == 'GET'){
     const zipCode = req.params.zipcode;
-    const contryCode = 'us';
+    
     const tempSetter = new tempHandler();
-    tempSetter.getTemp(zipCode, contryCode, (isSet, temp) => {
+    tempSetter.getTemp(zipCode, (isSet, temp) => {
         if (!isSet) {
             const jsonResponse = { status: {
                 code: 1004,
@@ -21,9 +21,12 @@ if(req.method == 'GET'){
             return res.json(jsonResponse);
           }
   
-          const response = methods.validQueryResponse(message, isSent);
-          response.user = undefined;
-          response.isCodeSent = isSent;
+          const response = { status: {
+            code: 200,
+            title: 'Success',
+            message: 'Temperature pulled',
+          }};;
+          response.temp = temp;
           return res.json(response);
 
     });
