@@ -4,7 +4,7 @@ const tempHandler = require('./tempHandler');
 
 // :ip/weather/:zipcode
 
-TempRouter.all('/weather/:zipcode', (req, res) => {
+TempRouter.all('/:zipcode', (req, res) => {
 if(req.method == 'GET'){
     const zipCode = req.params.zipcode;
     
