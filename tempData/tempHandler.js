@@ -1,4 +1,3 @@
-const config = require('./config.json');
 const ExternalAPIHandler = require('../externalAPIHandler');
 const parser = require('./tempParser');
 const util = require('util');
@@ -7,7 +6,7 @@ require('dotenv').config();
 class tempHandler {
     getTemp(zipCode, callback){
         const APIHandler = new ExternalAPIHandler();
-        const url = util.format(config.weather.url, zipCode, process.env.API_KEY);
+        const url = util.format(process.env.WEATHER_URL, zipCode, process.env.API_KEY);
         APIHandler.getExternalApi(url, function(err, resp) {
             if (err) {
               const error = new Error('Failed to fetch data from open weather API');
