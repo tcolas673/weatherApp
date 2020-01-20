@@ -19,6 +19,8 @@
   "homepage": "https://github.com/tcolas673/weatherApp#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2",
+    "request": "^2.88.0"
   }
 }

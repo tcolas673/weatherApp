@@ -6,15 +6,15 @@ const tempHandler = require('./tempHandler');
 
 TempRouter.all('/temp', (req, res) => {
 if(req.method == 'GET'){
-    const zipCode = req.params.zipcode;
+    const zipCode = req.query.zipcode;
     
     const tempSetter = new tempHandler();
-    tempSetter.getTemp(zipCode, (isSet, temp) => {
+    tempSetter.getTemp(zipCode, (isSet, resp, temp) => {
         if (!isSet) {
             const jsonResponse = { status: {
                 code: 1004,
                 title: 'Something went wrong',
-                message: 'Invalid HTTP Request',
+                message: resp.message,
               }};
             
             res.status(400);
@@ -24,9 +24,9 @@ if(req.method == 'GET'){
           const response = { status: {
             code: 200,
             title: 'Success',
-            message: 'Temperature pulled',
+            message: resp.message,
           }};;
-          response.temp = temp;
+          response.weather = temp;
           return res.json(response);
 
     });

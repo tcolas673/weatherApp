@@ -2,7 +2,8 @@
 const http = require('http');
 const express = require('express');
 // setting up my port that app will run on
-const PORT = 5000;
+require('dotenv').config();
+const PORT = process.env.PORT;
 
 // Setup a handler or a file that will hold my handlers
 const TempRouter = require('./tempData/tempRouter');
@@ -11,7 +12,7 @@ const TempRouter = require('./tempData/tempRouter');
 const app = express();
 
 // attach handler to endpoint
-// app.use('/', TempRouter);
+app.use('/weather', TempRouter);
 
 const server = http.createServer(app);
 

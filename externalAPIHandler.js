@@ -1,10 +1,10 @@
 const request = require('request');
 
 class ExternalAPIHandler {
-  getExternalApi(externalURL, options, callback) {
+  getExternalApi(externalURL, callback) {
     const responseFormat = 'json';
     const self = this;
-    request(externalURL, options, (err, res, body) => {
+    request(externalURL, (err, res, body) => {
       if (err) {
         console.log('Error: '+ err.message);
         return callback(err, null);
