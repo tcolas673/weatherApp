@@ -2,18 +2,16 @@
 FROM node:13.1.0
 
 #set working directory
-WORKDIR /usr/src/weather/api
-
-# add '/usr/src/sensei/node_modules.bin' to $PATH
-ENV PATH /usr/src/weather/api/node_modules.bin:$PATH
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
 # install and cache app dependencies
-COPY package*.json /usr/src/
+COPY package*.json ./
 RUN npm install --silent
 
 # Bundle app source
-COPY . .
+COPY . /usr/src/app
 
 # start app
 EXPOSE 3000
-CMD [ "nodemon", "server.js" ]
+CMD [ "node", "server.js" ]
