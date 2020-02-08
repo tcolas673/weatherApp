@@ -1,7 +1,7 @@
-#base image
+# base image
 FROM node:13.1.0
 
-#set working directory
+# set working directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
@@ -10,7 +10,7 @@ COPY package*.json ./
 RUN npm install --silent
 
 # Bundle app source
-COPY . /usr/src/app
+COPY . .
 
 # start app
 EXPOSE 3000
