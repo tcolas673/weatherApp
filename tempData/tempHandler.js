@@ -24,11 +24,13 @@ class tempHandler {
             } else { 
                 if(resp.cod ==200){
                     resp = parser.refine(resp);
+                    const success = {statusCode: 200, message: 'Temperature listed'};
+                    callback(true, success, resp);
+                    return;
+                } else {
+                  const error = {statusCode: resp.cod, message: resp.message};
+                  callback(false, error);
                 }
-              
-              const success = {statusCode: 200, message: 'Temperature listed'};
-              callback(true, success, resp);
-              return;
             }
 
         });

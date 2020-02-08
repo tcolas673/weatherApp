@@ -1,13 +1,25 @@
 const express = require('express');
 const TempRouter = new express.Router();
 const tempHandler = require('./tempHandler');
+const { postcodeValidator } = require('postcode-validator');
 
-// :ip/weather/:zipcode
+// /weather/:zipcode
 
 TempRouter.all('/:zipcode', (req, res) => {
-if(req.method == 'GET'){
+if (req.method == 'GET') {
     const zipCode = req.params.zipcode;
+    const isValid = postcodeValidator(zipCode, 'US');
     
+    if(!isValid){
+      const jsonResponse = { status: {
+        code: 1004,
+        title: 'Invalid Operation',
+        message: 'Invalid zipcode',
+      }};
+      res.status(400);
+    return res.json(jsonResponse);
+    }
+
     const tempSetter = new tempHandler();
     tempSetter.getTemp(zipCode, (isSet, resp, temp) => {
         if (!isSet) {
