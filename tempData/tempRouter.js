@@ -9,7 +9,8 @@ TempRouter.all('/:zipcode', (req, res) => {
 if (req.method == 'GET') {
     const zipCode = req.params.zipcode;
     const isValid = postcodeValidator(zipCode, 'US');
-    
+    // const format = /\d{5}/;
+    // const isValid = format.test(zipCode);
     if(!isValid){
       const jsonResponse = { status: {
         code: 1004,
